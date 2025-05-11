@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Res } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
+import { Response } from 'express';
+import * as JSONStream from 'JSONStream';
 
 @Controller('todos')
 export class TodosController {
@@ -13,10 +15,18 @@ export class TodosController {
     }
 
     @Get()
-    findAll(@Query('page') page?: string, @Query('limit') limit?: string) {
+    findAll(
+        @Query('page') page: string,
+        @Query('limit') limit: string,
+        @Res() res: Response
+    ) {
         const pageNum = Number(page) || 0;
         const limitNum = Number(limit) || 0;
-        return this.todosService.findAll(pageNum, limitNum);
+
+        return this.todosService
+            .findAll(pageNum, limitNum)
+            .pipe(JSONStream.stringify())
+            .pipe(res.type('json'));
     }
 
     @Get(':id')

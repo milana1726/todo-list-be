@@ -13,12 +13,12 @@ export class TodosService {
         return createTodo.save();
     }
 
-    async findAll(page = 0, limit = 0): Promise<Todo[]> {
+    findAll(page = 0, limit = 0) {
         const query = this.todoModel.find();
         if (page > 0 && limit > 0) {
-            return query.skip((page - 1) * limit).limit(limit).exec();
+            query.skip((page - 1) * limit).limit(limit);
         }
-        return query.exec();
+        return query.cursor();
     }
 
     async findOne(id: string): Promise<Todo> {
