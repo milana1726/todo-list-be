@@ -1,7 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { Logger } from '@nestjs/common';
 import * as dotenv from 'dotenv';
+import { CustomLoggerService } from './logger/custom-logger.service';
+import { HttpExceptionFilter } from './filter/http-exception.filter';
 
 dotenv.config();
 
@@ -10,10 +11,11 @@ async function bootstrap() {
 
   app.enableCors();
 
+  const logger = app.get(CustomLoggerService);
+  app.useLogger(logger);
+  app.useGlobalFilters(new HttpExceptionFilter(logger));
+
   await app.listen(process.env.PORT ?? 3000);
-  Logger.log(
-    `🚀 Server is running on PORT ${process.env.PORT}`,
-    'NestApplication',
-  );
+  logger.log(`🚀 Server is running on PORT ${process.env.PORT}`);
 }
 void bootstrap();

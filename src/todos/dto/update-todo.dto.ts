@@ -1,4 +1,4 @@
 export class UpdateTodoDto {
-  readonly message?: string;
+  readonly message: string;
   readonly completed?: string;
 }
