@@ -6,9 +6,8 @@ An API for managing a to-do list.
 
 ```bash
 Use `node 20.x` or higher.
-Clone this repo: `$ git clone https://github.com/rolling-scopes-school/milana1726-EPAMPLLT.git`.
-Switch to branch: `$ git checkout todolist-be`.
-Go to downloaded folder: `$ cd todolist-be`.
+Clone this repo: `$ git clone https://github.com/milana1726/todo-list-be.git`.
+Go to downloaded folder: `$ cd todo-list-be`.
 Install dependencies: `$ npm install`.
 ```
 ## Environment Variables
@@ -55,7 +54,7 @@ DELETE /todos/:id
 #Create a todo:
 {
   "message": "Buy groceries", //required field
-  "completed": false
+  "completed": false,
 }
 #Update a todo:
 {
@@ -71,6 +70,8 @@ DELETE /todos/:id
     "_id": "681c9d32cb9c22521d434ce8",
     "message": "Task #1",
     "completed": true,
+    "createdAt": 2025-05-20T22:58:08.480+00:00,
+    "updatedAt": 2025-06-22T18:52:49.278+00:00
     "__v": 0
 }
 #All todos:
@@ -79,12 +80,16 @@ DELETE /todos/:id
         "_id": "681c9d32cb9c22521d434ce8",
         "message": "Task #1",
         "completed": true,
+        "createdAt": 2025-05-20T22:58:08.480+00:00,
+        "updatedAt": 2025-06-22T18:52:49.278+00:00
         "__v": 0
     },
     {
         "_id": "681caafad3b9b7a127e99eb7",
         "message": "Task #2",
         "completed": false,
+        "createdAt": 2025-05-20T22:58:12.944+00:00,
+        "updatedAt": 2025-06-22T18:52:53.862+00:00
         "__v": 0
     },
 ]
