@@ -15,7 +15,7 @@ async function bootstrap() {
   app.useLogger(logger);
   app.useGlobalFilters(new HttpExceptionFilter(logger));
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT || 3000);
   logger.log(`🚀 Server is running on PORT ${process.env.PORT}`);
 }
 void bootstrap();
