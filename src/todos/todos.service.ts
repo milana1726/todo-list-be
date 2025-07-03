@@ -14,7 +14,7 @@ export class TodosService {
   }
 
   findAll(page = 0, limit = 0) {
-    const query = this.todoModel.find();
+    const query = this.todoModel.find().sort({ createdAt: -1 });
     if (page > 0 && limit > 0) {
       query.skip((page - 1) * limit).limit(limit);
     }
